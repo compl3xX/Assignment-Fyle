@@ -2,13 +2,20 @@
   margin: 0;
   padding: 0;
 }
-
+.search_user_repo {
+  height: 50px;
+  border: 2px solid black;
+  padding: 5px;
+}
 .main_container {
   margin: auto;
   min-height: 100vh;
   max-width: 1000px;
   border: solid 2px black;
   padding: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .profile_info_container {
@@ -59,9 +66,15 @@
   font-size: 14px;
   color: blue;
 }
+.twitter_link {
+  text-decoration: none;
+}
 
 /* repo section style */
 .repo_container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
 }
 .repos {
   margin: 10px;
@@ -101,4 +114,83 @@
   display: flex;
   flex-direction: row;
   gap: 2px;
+}
+
+.no_of_repo {
+  width: 200px;
+}
+
+/* pagination */
+.pagination_control {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}
+.pagination_btn {
+  height: 25px;
+  width: 25px;
+  background-color: transparent;
+  border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.pagination_container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+.no_of_repo {
+  height: 20px;
+}
+.pagination {
+  display: flex;
+  flex-direction: row;
+  list-style: none;
+  gap: 1px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.page {
+  border: 1px solid black;
+  padding: 2px;
+  width: 20px;
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.active {
+  background-color: rgb(87, 164, 253);
+  color: aliceblue;
+}
+
+.notactive {
+  background-color: rgb(185, 183, 183);
+  border: none;
+}
+
+.page_nav_btn {
+  display: flex;
+  justify-content: center;
+  justify-content: space-around;
+  padding: 50px;
+}
+
+.nav_btn {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100px;
+  height: 30px;
+  background-color:white;
+  border: 1px solid black;
+  border-radius: 10px;
+  color: rgb(87, 164, 253);
+  cursor: pointer;
 }
