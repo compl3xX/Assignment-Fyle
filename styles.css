@@ -2,3 +2,103 @@
   margin: 0;
   padding: 0;
 }
+
+.main_container {
+  margin: auto;
+  min-height: 100vh;
+  max-width: 1000px;
+  border: solid 2px black;
+  padding: 5px;
+}
+
+.profile_info_container {
+  padding: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  width: 50%;
+}
+.profile_info {
+  padding: 15px;
+}
+.link_container {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+}
+.profile_img_container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  gap: 10px;
+}
+
+.profile_img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 5px solid rgb(214, 214, 214);
+}
+
+.name {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.bio {
+  font-size: 16px;
+}
+
+.place {
+  font-size: 14px;
+}
+
+.twitter {
+  font-size: 14px;
+  color: blue;
+}
+
+/* repo section style */
+.repo_container {
+}
+.repos {
+  margin: 10px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 10px;
+}
+.card {
+  border: 2px solid #000000;
+  padding: 10px;
+  list-style: none;
+  width: 40%;
+  gap: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.card_topics {
+  display: flex;
+  flex-direction: row;
+  list-style: none;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.card_topic {
+  border: 1px solid black;
+  padding: 5px;
+  border-radius: 5px;
+  background-color: rgb(87, 164, 253);
+  color: aliceblue;
+}
+
+.place_container {
+  display: flex;
+  flex-direction: row;
+  gap: 2px;
+}

@@ -10,7 +10,70 @@
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
-    <p id="test">HELLO</p>
-    <script src="./logic.js" async defer></script>
+    <div class="main_container">
+      <!--Profile-->
+      <div class="profile_info_container">
+        <!-- Profile Img -->
+        <div class="profile_img_container">
+          <img id="profile_img" class="profile_img" src="" />
+
+          <div class="link_container">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              class="bi bi-link"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="M6.354 5.5H4a3 3 0 0 0 0 6h3a3 3 0 0 0 2.83-4H9q-.13 0-.25.031A2 2 0 0 1 7 10.5H4a2 2 0 1 1 0-4h1.535c.218-.376.495-.714.82-1z"
+              />
+              <path
+                d="M9 5.5a3 3 0 0 0-2.83 4h1.098A2 2 0 0 1 9 6.5h3a2 2 0 1 1 0 4h-1.535a4 4 0 0 1-.82 1H12a3 3 0 1 0 0-6z"
+              />
+            </svg>
+
+            <a id="profile_link">LINK</a>
+          </div>
+        </div>
+        <!-- Profile Info -->
+        <div class="profile_info">
+          <p id="name" class="name"></p>
+          <br />
+          <p id="bio" class="bio"></p>
+          <br />
+          <div class="place_container">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              class="bi bi-geo-alt"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A32 32 0 0 1 8 14.58a32 32 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10"
+              />
+              <path
+                d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4m0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6"
+              />
+            </svg>
+            <p id="place" class="place"></p>
+          </div>
+          <br />
+          <span class="twitter">Twitter:</span>
+          <p id="twitter" class="twitter"></p>
+        </div>
+      </div>
+      <!-- Repo -->
+      <div class="repo_container">
+        <ul id="repos" class="repos">
+          <!-- Here are all repos -->
+        </ul>
+      </div>
+    </div>
+
+    <script type="module" src="./logic.js" async defer></script>
   </body>
 </html>
