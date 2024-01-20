@@ -8,6 +8,8 @@ let page = 1;
 
 let totalPages
 
+import TOKEN from './config.js'
+
 const backBtn = document.getElementById('pagination_btn_back')
 const frwdBtn = document.getElementById('pagination_btn_forw')
 const pagination = document.getElementById('pagination')
@@ -140,7 +142,7 @@ async function fetchUserDetails(userName) {
 
     const rawData = await fetch(`https://api.github.com/users/${userName}`, {
         headers: {
-            Authorization: `token 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`,
+            Authorization: `token ${TOKEN}`,
         }
     })
 
@@ -175,7 +177,7 @@ async function currentPage(userName, pageNo) {
 
     let rawRepos = await fetch(`https://api.github.com/users/${userName}/repos?per_page=${perPage}&page=${pageNo}`, {
         headers: {
-            Authorization: `token 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`,
+            Authorization: `token ${TOKEN}`,
         }
     })
 
@@ -205,7 +207,7 @@ async function calPages(userName, repoPerPage) {
 
     const rawAllPages = await fetch(`https://api.github.com/users/${userName}/repos`, {
         headers: {
-            Authorization: `token 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`,
+            Authorization: `token ${TOKEN}`,
         }
     })
 
@@ -238,7 +240,7 @@ async function fetchUserRepo(repo) {
 
     const rawData = await fetch(`https://api.github.com/repos/${owner}/${repo}`, {
         headers: {
-            Authorization: `token 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`,
+            Authorization: `token ${TOKEN}`,
             Accept: 'application/vnd.github.mercy-preview+json',
         },
     })
