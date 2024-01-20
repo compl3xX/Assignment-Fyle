@@ -51,7 +51,7 @@ dropdown.addEventListener('change', function () {
 })
 
 
-
+// Handling which current page we are on
 function changePaginationPage(pageNo) {
 
     let activePage = pagination.querySelector('.active')
@@ -66,6 +66,7 @@ function changePaginationPage(pageNo) {
     }
 }
 
+// Handling going to next page functionality
 function nextPage(userName, pageNo) {
 
     let curPageNo = pageNo ? pageNo : page;
@@ -87,6 +88,7 @@ function nextPage(userName, pageNo) {
 
 }
 
+// Handling going to prev page functionality
 function prevPage(userName, pageNo) {
 
     let curPageNo = pageNo ? pageNo : page;
@@ -131,7 +133,7 @@ navBackBnt.addEventListener('click', function () {
 
 
 
-
+// fetchig User detail
 async function fetchUserDetails(userName) {
 
     let userData;

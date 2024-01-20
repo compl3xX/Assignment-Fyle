@@ -2,6 +2,8 @@
   margin: 0;
   padding: 0;
 }
+
+/* search bar */
 .search_user_repo {
   font-size: x-large;
   border: 2px solid black;
@@ -20,6 +22,7 @@
   justify-content: center;
 }
 
+/* profile  */
 .profile_info_container {
   padding: 20px;
   display: flex;
