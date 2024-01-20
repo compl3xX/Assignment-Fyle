@@ -18,7 +18,7 @@
       />
 
       <!--Profile-->
-      <div class="profile_info_container">
+      <div class="profile_info_container" id="profile_info_container">
         <!-- Profile Img -->
         <div class="profile_img_container">
           <img id="profile_img" class="profile_img" src="" />
@@ -76,6 +76,9 @@
       <!-- Repo -->
 
       <div class="repo_container">
+        <div class="loader" id="loader">
+          <h1>Loading...</h1>
+        </div>
         <ul id="repos" class="repos">
           <!-- Here are all repos -->
         </ul>
@@ -130,7 +133,7 @@
         </div>
       </div>
       <div class="page_nav_btn">
-        <button class="nav_btn">
+        <button class="nav_btn" id="nav_btn_prev">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="16"
@@ -147,7 +150,7 @@
             /></svg
           >Prev
         </button>
-        <button class="nav_btn">
+        <button class="nav_btn" id="nav_btn_next">
           Next<svg
             xmlns="http://www.w3.org/2000/svg"
             width="16"

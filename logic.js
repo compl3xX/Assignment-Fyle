@@ -8,18 +8,37 @@ let page = 1;
 
 let totalPages
 
+const backBtn = document.getElementById('pagination_btn_back')
+const frwdBtn = document.getElementById('pagination_btn_forw')
+const pagination = document.getElementById('pagination')
+const repoContainer = document.getElementById('repos')
+const loader = document.getElementById('loader')
+const profileContainer = document.getElementById('profile_info_container')
+const navNextBnt = document.getElementById('nav_btn_next')
+const navBackBnt = document.getElementById('nav_btn_prev')
+
+
+//Initialization
 
 fetchUserDetails(owner)
 calPages(owner, perPage)
+navBackBnt.classList.add('notactive')
+backBtn.classList.add('notactive')
+
+
+// Seachbar
 
 const searchQuery = document.getElementById('search_user_repo')
 
 searchQuery.addEventListener('keydown', function (e) {
     if (e.key === "Enter") {
+        if (repoContainer.innerHTML !== " ") repoContainer.innerHTML = " "
         owner = searchQuery.value
         fetchUserDetails(searchQuery.value)
     }
 })
+
+// Number of repos pers page
 
 const dropdown = document.getElementById('no_of_repos')
 
@@ -29,9 +48,7 @@ dropdown.addEventListener('change', function () {
     currentPage(owner, page)
 })
 
-const backBtn = document.getElementById('pagination_btn_back')
-const frwdBtn = document.getElementById('pagination_btn_forw')
-const pagination = document.getElementById('pagination')
+
 
 function changePaginationPage(pageNo) {
 
@@ -47,31 +64,79 @@ function changePaginationPage(pageNo) {
     }
 }
 
+function nextPage(userName, pageNo) {
+
+    let curPageNo = pageNo ? pageNo : page;
+
+
+    if (curPageNo !== totalPages) {
+        page == curPageNo;
+        page++;
+        if (page === totalPages) {
+            navNextBnt.classList.add('notactive')
+            frwdBtn.classList.add('notactive')
+        }
+        navBackBnt.classList.remove('notactive')
+        backBtn.classList.remove('notactive')
+        currentPage(userName, page)
+        changePaginationPage(page)
+
+    }
+
+}
+
+function prevPage(userName, pageNo) {
+
+    let curPageNo = pageNo ? pageNo : page;
+
+    if (curPageNo !== 1) {
+        page == curPageNo;
+        page--;
+        if (page === 1) {
+            navBackBnt.classList.add('notactive')
+            backBtn.classList.add('notactive')
+        }
+        currentPage(userName, page)
+        changePaginationPage(page)
+        navNextBnt.classList.remove('notactive')
+        frwdBtn.classList.remove('notactive')
+    }
+
+
+}
+
 backBtn.addEventListener('click', function () {
 
-    if (page !== 1) {
-        page--;
-        currentPage(owner, page)
-        changePaginationPage(page)
-    }
+
+    prevPage(owner, page)
 })
 
 frwdBtn.addEventListener('click', function () {
 
-    if (page !== totalPages) {
 
-        page++;
-        currentPage(owner, page)
-        changePaginationPage(page)
+    nextPage(owner, page)
 
-    }
 })
+
+navNextBnt.addEventListener('click', function () {
+    nextPage(owner, page)
+})
+
+navBackBnt.addEventListener('click', function () {
+    prevPage(owner, page)
+})
+
+
 
 
 
 async function fetchUserDetails(userName) {
 
     let userData;
+
+    profileContainer.classList.add('hide')
+    loader.classList.remove('hide');
+
 
     const rawData = await fetch(`https://api.github.com/users/${userName}`, {
         headers: {
@@ -82,10 +147,6 @@ async function fetchUserDetails(userName) {
     const jsonifiedData = await rawData.json()
 
     userData = jsonifiedData
-
-    // let rawRepos = await fetch(`https://api.github.com/users/${userName}/repos?per_page=${perPage}&page=${page}`)
-
-    // let jsonifiedRepos = await rawRepos.json()
 
     console.log(userData)
 
@@ -100,18 +161,17 @@ async function fetchUserDetails(userName) {
 
 
 
-    // for (let i = 0; i < jsonifiedRepos.length; i++) {
-    //     let repo = jsonifiedRepos[i]
-    //     const node = await fetchUserRepo(repo.name)
-    //     document.getElementById('repos').appendChild(node)
-    // }
-
+    profileContainer.classList.remove('hide')
+    loader.classList.add('hide');
     currentPage(userName, 1);
 }
 
 
-
+// populate repo section with repos
 async function currentPage(userName, pageNo) {
+
+    repoContainer.classList.add('hide');
+    loader.classList.remove('hide');
 
     let rawRepos = await fetch(`https://api.github.com/users/${userName}/repos?per_page=${perPage}&page=${pageNo}`, {
         headers: {
@@ -121,20 +181,25 @@ async function currentPage(userName, pageNo) {
 
     let jsonifiedRepos = await rawRepos.json()
 
-    let repoContainer = document.getElementById('repos')
+
 
     if (repoContainer.innerHTML !== " ") {
         repoContainer.innerHTML = " "
     }
 
-    
+
 
     for (let i = 0; i < jsonifiedRepos.length; i++) {
         let repo = jsonifiedRepos[i]
         const node = await fetchUserRepo(repo.name)
         repoContainer.appendChild(node)
     }
+
+    loader.classList.add('hide');
+    repoContainer.classList.remove('hide');
 }
+
+// cal the number of page for pagination accordiong to user choice
 
 async function calPages(userName, repoPerPage) {
 
@@ -147,8 +212,6 @@ async function calPages(userName, repoPerPage) {
     const allPages = await rawAllPages.json()
 
     totalPages = Math.ceil(allPages.length / repoPerPage)
-
-    // const pagination = document.getElementById('pagination')
 
     if (pagination.innerHTML !== " ") pagination.innerHTML = " "
 
@@ -169,6 +232,7 @@ async function calPages(userName, repoPerPage) {
 }
 
 
+// fetch detail about the particular repo
 
 async function fetchUserRepo(repo) {
 
@@ -214,59 +278,3 @@ async function fetchUserRepo(repo) {
 }
 
 
-
-
-// fetchUserRepo()
-
-// fetch(`https://api.github.com/repos/${owner}/${repo}`, {
-//     headers: {
-//         Accept: 'application/vnd.github.mercy-preview+json',
-//     },
-// })
-//     .then(response => response.json())
-//     .then(data => {
-//         if (data.topics) {
-//             console.log('Topics:', data.topics);
-//         } else {
-//             console.log('No topics found for this repository.');
-//         }
-//     })
-//     .catch(error => console.error('Error:', error));
-
-
-
-// async function getData() {
-//     let data = await fetch(`https://api.github.com/users/compl3xX`)
-//     console.log(await data.json())
-//     // let repos = await fetch(`https://api.github.com/repos/compl3xX`)
-//     // console.log(await repos.json())
-
-// }
-
-
-
-// getData()
-
-// const octokit = new Octokit({
-//     auth: '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'
-// });
-
-// const data = await octokit.request(`GET /users/{username}/repos`, {
-//     owner: `${owner}`,
-//     repo: `${repo}`,
-//     headers: {
-//         'X-GitHub-Api-Version': '2022-11-28'
-//     }
-// })
-
-
-// fetch(`https://api.github.com/users/compl3xX`)
-//     .then(response => response.json())
-//     .then(data => {
-//         if (data.topics) {
-//             console.log('Topics:', data.topics);
-//         } else {
-//             console.log('No topics found for this repository.');
-//         }
-//     })
-//     .catch(error => console.error('Error:', error));
